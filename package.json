@@ -1,0 +1,33 @@
+{
+  "name": "@apiverve/action-seo-web",
+  "version": "0.1.0-beta",
+  "description": "Extract metadata, scrape links, and analyze web pages for SEO",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build index.js -o dist --license licenses.txt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apiverve/action-seo-web.git"
+  },
+  "keywords": [
+    "seo",
+    "metadata",
+    "web",
+    "links",
+    "analysis"
+  ],
+  "author": "APIVerve <support@apiverve.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/apiverve/action-seo-web/issues"
+  },
+  "homepage": "https://github.com/apiverve/action-seo-web#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.1"
+  }
+}
