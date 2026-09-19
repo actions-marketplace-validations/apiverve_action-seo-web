@@ -1,10 +1,8 @@
-# APIVerve SEO &amp; Web Action
+# APIVerve SEO & Web Action
 
 > Extract metadata, scrape links, and analyze web pages for SEO
 
-> **Beta Release** - This action is in beta. We'd love your feedback! [Open an issue](https://github.com/apiverve/action-seo-web/issues) if you encounter any problems.
-
-[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-SEO &amp; Web-blue?logo=github)](https://github.com/marketplace/actions/apiverve-seo-web)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-SEO_%26_Web-blue?logo=github)](https://github.com/apiverve/action-seo-web)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **[Browse All APIs](https://apiverve.com/marketplace?utm_source=github&utm_medium=action&utm_campaign=seo-web)** | **[Get Free API Key](https://dashboard.apiverve.com/signup?utm_source=github&utm_medium=action&utm_campaign=seo-web)** | **[Documentation](https://docs.apiverve.com?utm_source=github&utm_medium=action&utm_campaign=seo-web)**
@@ -13,7 +11,7 @@
 
 ## What does this action do?
 
-This action provides access to APIVerve's SEO &amp; Web APIs directly in your GitHub workflows:
+This action provides access to APIVerve's SEO & Web APIs directly in your GitHub workflows:
 
 - Extract metadata from web pages
 - Scrape and validate links
@@ -24,23 +22,23 @@ This action provides access to APIVerve's SEO &amp; Web APIs directly in your Gi
 
 | API | Description |
 |-----|-------------|
-| `metadataextractor` | Metadata Extractor is a simple tool for extracting metadata from web pages. It returns the meta title, meta description, and more. |
-| `linkscraper` | Link Scraper is a simple tool for scraping web page links. It returns all the links on a web page. |
-| `urltitle` | URL Title is a simple tool for getting the title of a web page. It returns the title of the web page based on the URL provided. |
-| `seoquickcheck` | seoquickcheck API |
-| `websitereadability` | Website Readability is a simple tool for analyzing the readability of a website. It returns the readability score of the website provided. |
+| `metadataextractor` | Metadata Extractor extracts HTML metadata from any submitted URL, returning the page title, meta description, author, robots directives, and language. Paid tiers add Open Graph tags, JSON-LD schemas, and favicons. |
+| `linkscraper` | Link Scraper extracts internal and external links from any webpage URL in real time. It resolves relative paths to absolute URLs, strips empty fragments, and returns anchor text with internal and external counts. |
+| `urltitle` | URL Title fetches the HTML title tag of any web page in real time from a target URL. Paid plans also retrieve an array of every H1 heading tag found on the page. |
+| `seovalidator` | SEO Quick Validator inspects live web pages for on-page SEO errors and tag issues. Pass any URL to inspect title lengths, meta descriptions, H1 headings, viewport and canonical tags, image alt text, and unverified external links. |
+| `websitereadability` | Website Readability analyzes live web pages to score their reading difficulty and educational grade level. It returns Flesch Reading Ease, Flesch-Kincaid grade level, word count, sentence count, and estimated reading time. |
 
 ---
 
 ## Quick Start
 
 ```yaml
-- name: SEO &amp; Web
+- name: SEO & Web
   uses: apiverve/action-seo-web@v1
   with:
     api_key: ${{ secrets.APIVERVE_KEY }}
     api: metadataextractor
-    params: '{&quot;url&quot;: &quot;https://example.com&quot;}'
+    params: '{"url": "https://example.com"}'
 ```
 
 ---
@@ -61,7 +59,7 @@ Go to your repository **Settings** → **Secrets and variables** → **Actions**
 ### 3. Use in Workflow
 
 ```yaml
-- name: SEO &amp; Web
+- name: SEO & Web
   uses: apiverve/action-seo-web@v1
   with:
     api_key: ${{ secrets.APIVERVE_KEY }}
@@ -76,12 +74,11 @@ Go to your repository **Settings** → **Secrets and variables** → **Actions**
 | Input | Description | Required | Default |
 |-------|-------------|----------|---------|
 | `api_key` | Your APIVerve API key (or set `APIVERVE_API_KEY` env var) | Yes* | - |
-| `api` | API to use: `metadataextractor`, `linkscraper`, `urltitle`, `seoquickcheck`, `websitereadability` | No | `metadataextractor` |
+| `api` | API to use: `metadataextractor`, `linkscraper`, `urltitle`, `seovalidator`, `websitereadability` | No | `metadataextractor` |
 | `params` | JSON parameters for the API | No | `{}` |
 | `output_file` | Path to save binary output (images, PDFs) | No | - |
 | `format` | Response format: `json`, `yaml`, or `xml` | No | `json` |
 | `fail_on_error` | Fail workflow if API returns error | No | `true` |
-
 *\*API key is required but can be provided via input OR `APIVERVE_API_KEY` / `APIVERVE_KEY` environment variable.*
 
 ## Outputs
@@ -92,7 +89,6 @@ Go to your repository **Settings** → **Secrets and variables** → **Actions**
 | `data` | The `data` field from response as JSON |
 | `status` | API status (`ok` or `error`) |
 | `file` | Path to downloaded file (if `output_file` was used) |
-
 ---
 
 ## Examples
@@ -108,7 +104,7 @@ Extract metadata from a webpage
   with:
     api_key: ${{ secrets.APIVERVE_KEY }}
     api: metadataextractor
-    params: '{&quot;url&quot;: &quot;https://example.com&quot;}'
+    params: '{"url": "https://example.com"}'
 
 - name: Use result
   run: echo "Result: ${{ steps.seo-web-0.outputs.data }}"
@@ -125,7 +121,7 @@ Extract all links from a webpage
   with:
     api_key: ${{ secrets.APIVERVE_KEY }}
     api: linkscraper
-    params: '{&quot;url&quot;: &quot;https://example.com&quot;}'
+    params: '{"url": "https://example.com"}'
 
 - name: Use result
   run: echo "Result: ${{ steps.seo-web-1.outputs.data }}"
@@ -137,7 +133,7 @@ Extract all links from a webpage
 ## Full Workflow Example
 
 ```yaml
-name: SEO &amp; Web Workflow
+name: SEO & Web Workflow
 
 on:
   push:
@@ -150,13 +146,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run SEO &amp; Web
+      - name: Run SEO & Web
         id: result
         uses: apiverve/action-seo-web@v1
         with:
           api_key: ${{ secrets.APIVERVE_KEY }}
           api: metadataextractor
-          params: '{&quot;url&quot;: &quot;https://example.com&quot;}'
+          params: '{"url": "https://example.com"}'
 
       - name: Show result
         run: |
